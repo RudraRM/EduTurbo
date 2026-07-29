@@ -1,0 +1,290 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 25% 99%;
+    --foreground: 240 12% 9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 12% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 12% 9%;
+    --primary: 256 78% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 9% 95.5%;
+    --secondary-foreground: 240 8% 22%;
+    --muted: 240 9% 95.5%;
+    --muted-foreground: 240 5% 46%;
+    --accent: 253 70% 96%;
+    --accent-foreground: 256 55% 45%;
+    --destructive: 0 72% 52%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 8% 90%;
+    --input: 240 8% 87%;
+    --ring: 256 78% 60%;
+    --sidebar: 40 20% 97.5%;
+    --radius: 1rem;
+
+    /* pastel accent ramp used for folders, cards & icons */
+    --pastel-violet: 253 75% 93%;
+    --pastel-sky: 203 85% 92%;
+    --pastel-mint: 152 55% 90%;
+    --pastel-peach: 24 90% 92%;
+    --pastel-rose: 340 75% 93%;
+    --pastel-amber: 43 90% 90%;
+  }
+
+  .dark {
+    --background: 240 8% 5.5%;
+    --foreground: 240 8% 94%;
+    --card: 240 7% 8.2%;
+    --card-foreground: 240 8% 94%;
+    --popover: 240 7% 9%;
+    --popover-foreground: 240 8% 94%;
+    --primary: 256 85% 68%;
+    --primary-foreground: 256 30% 10%;
+    --secondary: 240 6% 13%;
+    --secondary-foreground: 240 6% 80%;
+    --muted: 240 6% 13%;
+    --muted-foreground: 240 5% 58%;
+    --accent: 256 35% 17%;
+    --accent-foreground: 256 80% 82%;
+    --destructive: 0 68% 58%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 6% 15.5%;
+    --input: 240 6% 19%;
+    --ring: 256 85% 68%;
+    --sidebar: 240 7% 7%;
+
+    --pastel-violet: 255 30% 20%;
+    --pastel-sky: 207 45% 18%;
+    --pastel-mint: 158 30% 15%;
+    --pastel-peach: 24 40% 17%;
+    --pastel-rose: 337 32% 18%;
+    --pastel-amber: 42 42% 15%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.22);
+  }
+
+  /* slim, unobtrusive scrollbars */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted-foreground) / 0.25) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.25);
+    border-radius: 8px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: hsl(var(--background) / 0.72);
+    backdrop-filter: blur(16px) saturate(1.4);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      100deg,
+      hsl(256 78% 60%),
+      hsl(280 75% 62%),
+      hsl(210 90% 60%)
+    );
+  }
+
+  .gradient-primary {
+    background-image: linear-gradient(
+      120deg,
+      hsl(256 78% 58%),
+      hsl(276 74% 60%)
+    );
+  }
+
+  .hero-glow {
+    background:
+      radial-gradient(48rem 24rem at 18% 0%, hsl(256 80% 62% / 0.14), transparent 60%),
+      radial-gradient(40rem 22rem at 82% 8%, hsl(203 90% 60% / 0.12), transparent 60%),
+      radial-gradient(36rem 20rem at 55% 100%, hsl(330 80% 66% / 0.08), transparent 60%);
+  }
+
+  .skeleton-shimmer {
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--foreground) / 0.05),
+      transparent
+    );
+    background-size: 400px 100%;
+    background-repeat: no-repeat;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+   Rich text — shared styles for the TipTap editor and markdown rendering
+   ──────────────────────────────────────────────────────────────────────────── */
+.rich-text {
+  @apply text-[15px] leading-7 text-foreground;
+}
+
+.rich-text > * + * {
+  margin-top: 0.75em;
+}
+
+.rich-text h1 {
+  @apply mt-8 text-3xl font-bold tracking-tight first:mt-0;
+}
+.rich-text h2 {
+  @apply mt-8 text-2xl font-semibold tracking-tight first:mt-0;
+}
+.rich-text h3 {
+  @apply mt-6 text-xl font-semibold tracking-tight;
+}
+.rich-text h4 {
+  @apply mt-4 text-base font-semibold;
+}
+
+.rich-text p {
+  @apply leading-7;
+}
+
+.rich-text a {
+  @apply font-medium text-primary underline decoration-primary/40 underline-offset-4 hover:decoration-primary;
+}
+
+.rich-text strong {
+  @apply font-semibold;
+}
+
+.rich-text ul {
+  @apply list-disc space-y-1.5 pl-6 marker:text-muted-foreground/70;
+}
+.rich-text ol {
+  @apply list-decimal space-y-1.5 pl-6 marker:text-muted-foreground/70;
+}
+.rich-text li > ul,
+.rich-text li > ol {
+  @apply mt-1.5;
+}
+
+.rich-text ul[data-type="taskList"] {
+  @apply list-none space-y-1.5 pl-1;
+}
+.rich-text ul[data-type="taskList"] li {
+  @apply flex items-start gap-2;
+}
+.rich-text ul[data-type="taskList"] li > label {
+  @apply mt-1.5 flex-none;
+}
+.rich-text ul[data-type="taskList"] input[type="checkbox"] {
+  @apply h-4 w-4 rounded border-input accent-primary;
+}
+
+.rich-text blockquote {
+  @apply my-4 rounded-2xl border border-primary/15 bg-accent/60 px-5 py-4 text-[15px] not-italic;
+}
+.rich-text blockquote p:first-of-type::before,
+.rich-text blockquote p:last-of-type::after {
+  content: none;
+}
+
+.rich-text code {
+  @apply rounded-md bg-muted px-1.5 py-0.5 font-mono text-[0.85em] text-accent-foreground;
+}
+
+.rich-text pre {
+  @apply my-4 overflow-x-auto rounded-2xl border bg-muted/60 p-4;
+}
+.rich-text pre code {
+  @apply bg-transparent p-0 text-[13px] leading-6 text-foreground;
+}
+
+.rich-text hr {
+  @apply my-8 border-border;
+}
+
+.rich-text mark {
+  @apply rounded-sm bg-[hsl(var(--pastel-amber))] px-0.5 text-foreground;
+}
+
+.rich-text img {
+  @apply my-4 max-w-full rounded-2xl;
+}
+
+.rich-text table {
+  @apply my-4 w-full border-collapse overflow-hidden text-sm;
+}
+.rich-text th {
+  @apply border border-border bg-muted/70 px-3 py-2 text-left font-semibold;
+}
+.rich-text td {
+  @apply border border-border px-3 py-2 align-top;
+}
+.rich-text .tableWrapper {
+  @apply my-4 overflow-x-auto rounded-xl;
+}
+
+.rich-text .katex-display {
+  @apply my-4 overflow-x-auto overflow-y-hidden py-1;
+}
+
+/* TipTap specifics */
+.tiptap {
+  @apply min-h-[60vh] outline-none;
+}
+
+.tiptap p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  @apply pointer-events-none float-left h-0 text-muted-foreground/60;
+}
+
+.tiptap .selectedCell::after {
+  content: "";
+  @apply pointer-events-none absolute inset-0 bg-primary/10;
+}
+
+.tiptap table {
+  position: relative;
+}
+.tiptap td,
+.tiptap th {
+  position: relative;
+}
+
+.tiptap .column-resize-handle {
+  @apply absolute -bottom-px -right-0.5 top-0 w-1 bg-primary/50;
+  pointer-events: none;
+}
