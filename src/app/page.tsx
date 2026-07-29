@@ -20,6 +20,7 @@ import Link from "next/link";
 
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
+import { TypedText } from "@/components/typed-text";
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -110,7 +111,7 @@ export default function LandingPage() {
               Your AI learning workspace
             </div>
             <h1 className="mx-auto max-w-3xl text-balance text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl">
-              Turn anything into <span className="gradient-text">knowledge</span>
+              Turn anything into <TypedText text="knowledge" className="gradient-text" delay={0.5} />
             </h1>
             <p className="mx-auto mt-6 max-w-xl text-balance text-lg text-muted-foreground">
               Drop in a lecture, paper, podcast or video. Lumen turns it into
