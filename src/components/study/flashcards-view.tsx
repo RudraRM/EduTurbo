@@ -184,7 +184,14 @@ export function FlashcardsView({ doc, material }: FlashcardsViewProps) {
     );
   }
 
-  const card = deck[order[index]];
+  const cardIndex = order[index];
+  const card = cardIndex !== undefined ? deck[cardIndex] : undefined;
+
+  if (!card) {
+    return (
+      <div className="mx-auto mt-8 h-72 max-w-xl animate-pulse-soft rounded-3xl bg-muted skeleton-shimmer" />
+    );
+  }
 
   return (
     <div className="mx-auto max-w-xl pt-2">
