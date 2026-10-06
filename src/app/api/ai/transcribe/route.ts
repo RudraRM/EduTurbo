@@ -3,16 +3,12 @@ import { NextResponse } from "next/server";
 export const dynamic = "force-dynamic";
 export const maxDuration = 120;
 
-const GROQ_AUDIO_URL = "https://api.groq.com/openai/v1/audio/transcriptions";
+const NVIDIA_AUDIO_URL = "https://integrate.api.nvidia.com/v1/audio/transcriptions";
 
-/**
- * Same-origin relay to Groq's Whisper transcription API. The user's key is
- * forwarded from the `x-groq-key` header and never persisted.
- */
 export async function POST(request: Request) {
-  const apiKey = request.headers.get("x-groq-key");
+  const apiKey = request.headers.get("x-nvidia-key");
   if (!apiKey) {
-    return NextResponse.json({ error: "Missing Groq API key." }, { status: 401 });
+    return NextResponse.json({ error: "Missing NVIDIA NIM API key." }, { status: 401 });
   }
 
   let form: FormData;
@@ -24,14 +20,14 @@ export async function POST(request: Request) {
 
   let upstream: Response;
   try {
-    upstream = await fetch(GROQ_AUDIO_URL, {
+    upstream = await fetch(NVIDIA_AUDIO_URL, {
       method: "POST",
       headers: { authorization: `Bearer ${apiKey}` },
       body: form,
     });
   } catch {
     return NextResponse.json(
-      { error: "Could not reach Groq. Check your connection and try again." },
+      { error: "Could not reach NVIDIA NIM. Check your connection and try again." },
       { status: 502 }
     );
   }
