@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { createProvider } from "./groq";
+import { createProvider } from "./nvidia";
 import {
   clampContext,
   FLASHCARD_PROMPT,
@@ -183,7 +183,7 @@ export async function runWritingAction(
   return result.trim();
 }
 
-/** Extract text/description from an image via Groq's vision model. */
+/** Extract text/description from an image via NVIDIA NIM vision model. */
 export async function extractImageContent(
   config: GenerateConfig,
   dataUrl: string
