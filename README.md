@@ -100,3 +100,15 @@ src/
 - Scanned/image-only PDFs have no extractable text — upload pages as images instead.
 - Sharing a note makes it readable by anyone with the link (`is_public` flag,
   enforced by RLS).
+
+
+## Repairing a broken local install
+
+If `npm run dev` reports `Cannot find module '../server/require-hook'`, the local `node_modules` tree is incomplete. Reinstall the exact locked dependencies:
+
+```bash
+npm ci
+npm run dev
+```
+
+The `predev` and `prebuild` checks also detect and repair a missing Next.js runtime file automatically.
