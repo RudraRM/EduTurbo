@@ -13,11 +13,11 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { createProvider } from "@/lib/ai/groq";
+import { createProvider } from "@/lib/ai/nvidia";
 import { useSettings } from "@/stores/settings-store";
 import { useUI } from "@/stores/ui-store";
 
-export async function validateGroqKey(key: string, model: string): Promise<boolean> {
+export async function validateNvidiaKey(key: string, model: string): Promise<boolean> {
   try {
     const provider = createProvider(key);
     await provider.chat({
@@ -41,7 +41,7 @@ export function ApiKeyDialog() {
     const key = value.trim();
     if (!key) return;
     setChecking(true);
-    const valid = await validateGroqKey(key, model);
+    const valid = await validateNvidiaKey(key, model);
     setChecking(false);
 
     if (!valid) {
@@ -63,26 +63,26 @@ export function ApiKeyDialog() {
           <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent">
             <KeyRound className="h-6 w-6 text-accent-foreground" />
           </div>
-          <DialogTitle>Connect your Groq API key</DialogTitle>
+          <DialogTitle>Connect your NVIDIA NIM API key</DialogTitle>
           <DialogDescription>
-            Lumen runs on Groq for near-instant AI. Create a free key, paste it
+            Lumen runs on NVIDIA NIM. Create a Build API key, paste it
             below, and you&rsquo;re ready.
           </DialogDescription>
         </DialogHeader>
 
         <a
-          href="https://console.groq.com/keys"
+          href="https://build.nvidia.com/"
           target="_blank"
           rel="noreferrer"
           className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
         >
-          Get a free key at console.groq.com
+          Get a key at build.nvidia.com
           <ExternalLink className="h-3.5 w-3.5" />
         </a>
 
         <Input
           type="password"
-          placeholder="gsk_…"
+          placeholder="nvapi-…"
           value={value}
           onChange={(event) => setValue(event.target.value)}
           onKeyDown={(event) => event.key === "Enter" && void save()}
