@@ -1,7 +1,7 @@
 import type { SourceType } from "@/lib/types";
 import { extractImageContent, transcribeMedia, type GenerateConfig } from "@/lib/ai/generate";
 
-export const MAX_MEDIA_BYTES = 25 * 1024 * 1024; // Groq Whisper upload cap
+export const MAX_MEDIA_BYTES = 25 * 1024 * 1024; // NVIDIA Parakeet upload cap
 export const MAX_FILE_BYTES = 50 * 1024 * 1024;
 
 const EXTENSION_MAP: Record<string, SourceType> = {
@@ -118,7 +118,7 @@ function readAsDataURL(file: File): Promise<string> {
 /**
  * Extract study-ready text from an uploaded file. Runs fully client-side;
  * image description and audio/video transcription go through the user's own
- * Groq key.
+ * NVIDIA NIM key.
  */
 export async function extractFromFile(
   file: File,
