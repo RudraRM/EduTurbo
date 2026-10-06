@@ -184,7 +184,7 @@ export function UploadDialog() {
     }
     if (NEEDS_KEY.includes(type) && !apiKey) {
       setApiKeyDialogOpen(true);
-      toast.info("Add your Groq key first — images, audio and video need AI to be read.");
+      toast.info("Add your NVIDIA NIM key first — images, audio and video need AI to be read.");
       return;
     }
 
