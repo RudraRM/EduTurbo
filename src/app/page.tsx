@@ -71,7 +71,7 @@ const FEATURES = [
   {
     icon: Zap,
     title: "Fast, private AI",
-    body: "Powered by Groq for near-instant responses. Your API key lives only in your browser — never on our servers.",
+    body: "Powered by NVIDIA NIM for near-instant responses. Your API key lives only in your browser — never on our servers.",
     tint: "bg-[hsl(var(--pastel-amber))]",
   },
 ];
@@ -250,7 +250,7 @@ export default function LandingPage() {
               Study smarter in the next five minutes
             </h2>
             <p className="relative mx-auto mt-4 max-w-md text-primary-foreground/85">
-              Free to use with your own Groq API key. Your key stays in your
+              Free to use with your own NVIDIA NIM API key. Your key stays in your
               browser — always.
             </p>
             <Button
@@ -272,7 +272,7 @@ export default function LandingPage() {
         <div className="container flex flex-col items-center justify-between gap-4 sm:flex-row">
           <Logo className="opacity-80" />
           <p className="text-sm text-muted-foreground">
-            Built for curious minds. Bring your own Groq key.
+            Built for curious minds. Bring your own NVIDIA NIM key.
           </p>
         </div>
       </footer>
