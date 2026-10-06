@@ -2,24 +2,17 @@ import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
-const GROQ_CHAT_URL = "https://api.groq.com/openai/v1/chat/completions";
+const NVIDIA_CHAT_URL = "https://integrate.api.nvidia.com/v1/chat/completions";
 
-/**
- * Same-origin relay to Groq's chat completions API.
- *
- * The caller supplies their own Groq key in the `x-groq-key` header. The key
- * is forwarded upstream and never logged or stored — this route exists purely
- * so browsers can stream completions without CORS constraints.
- */
 export async function POST(request: Request) {
-  const apiKey = request.headers.get("x-groq-key");
+  const apiKey = request.headers.get("x-nvidia-key");
   if (!apiKey) {
-    return NextResponse.json({ error: "Missing Groq API key." }, { status: 401 });
+    return NextResponse.json({ error: "Missing NVIDIA NIM API key." }, { status: 401 });
   }
 
   let upstream: Response;
   try {
-    upstream = await fetch(GROQ_CHAT_URL, {
+    upstream = await fetch(NVIDIA_CHAT_URL, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -29,7 +22,7 @@ export async function POST(request: Request) {
     });
   } catch {
     return NextResponse.json(
-      { error: "Could not reach Groq. Check your connection and try again." },
+      { error: "Could not reach NVIDIA NIM. Check your connection and try again." },
       { status: 502 }
     );
   }
