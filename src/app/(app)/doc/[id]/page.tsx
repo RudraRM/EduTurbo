@@ -479,11 +479,11 @@ export default function DocumentPage() {
           </div>
           <h2 className="mt-6 text-xl font-semibold">Ready to generate your notes</h2>
           <p className="mt-2 max-w-sm text-sm leading-6 text-muted-foreground">
-            Connect your free Groq API key and Lumen will turn this{" "}
+            Connect your free NVIDIA NIM API key and Lumen will turn this{" "}
             {SOURCE_LABEL[doc.source_type]} into beautiful study notes.
           </p>
           <Button className="mt-6" onClick={() => setApiKeyDialogOpen(true)}>
-            Connect Groq key
+            Connect NVIDIA NIM key
           </Button>
         </div>
       ) : doc.status === "error" && !note ? (
