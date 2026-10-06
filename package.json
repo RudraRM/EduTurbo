@@ -4,9 +4,9 @@
   "private": true,
   "description": "Lumen — an AI-powered learning workspace. Turn anything into beautiful notes, flashcards, and quizzes.",
   "scripts": {
-    "predev": "node scripts/copy-pdf-worker.mjs",
+    "predev": "node scripts/ensure-dependencies.mjs && node scripts/copy-pdf-worker.mjs",
     "dev": "next dev",
-    "prebuild": "node scripts/copy-pdf-worker.mjs",
+    "prebuild": "node scripts/ensure-dependencies.mjs && node scripts/copy-pdf-worker.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
