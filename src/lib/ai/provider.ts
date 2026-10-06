@@ -1,7 +1,7 @@
 /**
  * Provider abstraction for chat-completion style AI backends.
  *
- * Lumen ships with a single provider — Groq — per product requirements, but
+ * Lumen ships with a single provider — NVIDIA NIM — per product requirements, but
  * everything above this layer only talks to the `AIProvider` interface, so a
  * different backend can be dropped in without touching feature code.
  *
@@ -57,4 +57,4 @@ export class AIError extends Error {
 }
 
 export const MISSING_KEY_MESSAGE =
-  "Add your Groq API key in Settings to unlock AI features.";
+  "Add your NVIDIA NIM API key in Settings to unlock AI features.";
