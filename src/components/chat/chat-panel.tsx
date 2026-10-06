@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useChatMessages, useClearChat, useSaveChatMessage } from "@/hooks/use-chat";
-import { createProvider } from "@/lib/ai/groq";
+import { createProvider } from "@/lib/ai/nvidia";
 import { chatSystemPrompt, clampContext } from "@/lib/ai/prompts";
 import type { AIMessage } from "@/lib/ai/provider";
 import { htmlToMarkdown } from "@/lib/markdown";
