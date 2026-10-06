@@ -20,7 +20,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-import { validateGroqKey } from "@/components/shell/api-key-dialog";
+import { validateNvidiaKey } from "@/components/shell/api-key-dialog";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -41,7 +41,7 @@ import {
 import { useSignOut, useUser } from "@/hooks/use-user";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
-import { GROQ_MODELS, useSettings } from "@/stores/settings-store";
+import { NVIDIA_MODELS, useSettings } from "@/stores/settings-store";
 
 const profileSchema = z.object({
   fullName: z.string().min(2, "Enter your name"),
@@ -104,7 +104,7 @@ export default function SettingsPage() {
     const key = keyDraft.trim();
     if (!key) return;
     setCheckingKey(true);
-    const valid = await validateGroqKey(key, model);
+    const valid = await validateNvidiaKey(key, model);
     setCheckingKey(false);
     if (!valid) {
       toast.error("That key didn't work. Double-check it and try again.");
@@ -112,7 +112,7 @@ export default function SettingsPage() {
     }
     setApiKey(key);
     setKeyDraft("");
-    toast.success("Groq key saved — stored only in this browser.");
+    toast.success("NVIDIA NIM key saved — stored only in this browser.");
   }
 
   async function saveProfile(values: z.infer<typeof profileSchema>) {
@@ -144,12 +144,12 @@ export default function SettingsPage() {
         {/* AI */}
         <SectionCard
           icon={KeyRound}
-          title="AI · Groq"
-          description="Lumen is powered exclusively by Groq for near-instant responses."
+          title="AI · NVIDIA NIM"
+          description="Lumen is powered by NVIDIA NIM for fast, capable responses."
         >
           <div className="space-y-5">
             <div>
-              <Label htmlFor="groq-key">API key</Label>
+              <Label htmlFor="nvidia-key">API key</Label>
               {apiKey ? (
                 <div className="mt-2 flex items-center gap-2">
                   <div className="flex h-10 flex-1 items-center gap-2 rounded-xl border bg-secondary/50 px-3.5 font-mono text-sm text-muted-foreground">
@@ -170,7 +170,7 @@ export default function SettingsPage() {
               ) : (
                 <div className="mt-2 flex gap-2">
                   <Input
-                    id="groq-key"
+                    id="nvidia-key"
                     type="password"
                     placeholder="gsk_…"
                     value={keyDraft}
@@ -185,12 +185,12 @@ export default function SettingsPage() {
                 </div>
               )}
               <a
-                href="https://console.groq.com/keys"
+                href="https://build.nvidia.com/"
                 target="_blank"
                 rel="noreferrer"
                 className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
               >
-                Get a free key at console.groq.com
+                Get a key at build.nvidia.com
                 <ExternalLink className="h-3 w-3" />
               </a>
             </div>
@@ -202,7 +202,7 @@ export default function SettingsPage() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  {GROQ_MODELS.map((option) => (
+                  {NVIDIA_MODELS.map((option) => (
                     <SelectItem key={option.id} value={option.id}>
                       <span className="font-medium">{option.label}</span>
                       <span className="ml-2 text-xs text-muted-foreground">
