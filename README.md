@@ -5,7 +5,7 @@ audio, video — or paste a YouTube link — and Lumen generates beautiful,
 fully-editable study notes, a document-aware AI tutor, flashcards, and four
 kinds of quizzes.
 
-Built with Next.js, Supabase, and Groq. Every user brings their own Groq API
+Built with Next.js, Supabase, and NVIDIA NIM. Every user brings their own NVIDIA NIM Build API
 key, stored **only in their browser** — never on a server.
 
 ## Features
@@ -26,7 +26,7 @@ key, stored **only in their browser** — never on a server.
 Next.js 14 (App Router) · React 18 · TypeScript · Tailwind CSS ·
 shadcn/ui-style components (Radix primitives) · Framer Motion · Zustand ·
 TanStack Query · Supabase (Auth + Postgres + Storage) · TipTap ·
-React Markdown + KaTeX · Zod · React Hook Form · Groq (chat, vision, Whisper)
+React Markdown + KaTeX · Zod · React Hook Form · NVIDIA NIM (chat, vision, Parakeet)
 
 ## Getting started
 
@@ -57,20 +57,20 @@ activate "Continue with Google".
 npm run dev
 ```
 
-Open http://localhost:3000, create an account, and add your Groq key when
-prompted (get one free at [console.groq.com/keys](https://console.groq.com/keys)).
+Open http://localhost:3000, create an account, and add your NVIDIA NIM Build API key when
+prompted (create one at [build.nvidia.com](https://build.nvidia.com/)).
 
 ## How the AI layer works
 
-- **Groq only, by design.** The provider abstraction (`src/lib/ai/provider.ts`)
-  ships with a single implementation: `GroqProvider`.
+- **NVIDIA NIM only, by design.** The provider abstraction (`src/lib/ai/provider.ts`)
+  ships with a single implementation: `NvidiaProvider`.
 - **Keys are local to every user.** The key is kept in `localStorage`
   (Zustand persist) and attached per-request as a header. The `/api/ai/*`
   routes are stateless pass-through relays that exist only to avoid browser
   CORS constraints — nothing is logged or stored server-side.
 - **Extraction is client-side.** PDFs (pdf.js), Word (mammoth), PowerPoint
   (JSZip + XML), and text files are parsed in the browser. Images go through
-  Groq's vision model; audio/video through Groq Whisper; YouTube transcripts
+  NVIDIA NIM's vision model; audio/video through NVIDIA Parakeet; YouTube transcripts
   are fetched by a small server route (no key required).
 
 ## Project structure
@@ -96,7 +96,7 @@ src/
 
 ## Notes
 
-- Audio/video transcription is capped at 25 MB (Groq's upload limit).
+- Audio/video transcription is capped at 25 MB (NVIDIA's upload limit).
 - Scanned/image-only PDFs have no extractable text — upload pages as images instead.
 - Sharing a note makes it readable by anyone with the link (`is_public` flag,
   enforced by RLS).
