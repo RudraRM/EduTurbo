@@ -9,21 +9,6 @@ export const NVIDIA_MODELS = [
     label: "Nemotron 3.5 Lightning 30B",
     hint: "Fast, capable, and recommended",
   },
-  {
-    id: "meta/llama-3.3-70b-instruct",
-    label: "Llama 3.3 70B",
-    hint: "Strong general-purpose reasoning",
-  },
-  {
-    id: "moonshotai/kimi-k3",
-    label: "Kimi K3",
-    hint: "Long-context reasoning",
-  },
-  {
-    id: "nvidia/nemotron-3-nano-30b-a3b",
-    label: "Nemotron 3 Nano",
-    hint: "Fastest · lighter answers",
-  },
 ] as const;
 
 export const VISION_MODEL = "meta/muse-glimmer-30b";
@@ -46,9 +31,16 @@ export const useSettings = create<SettingsState>()(
       model: NVIDIA_MODELS[0].id,
       hasOnboarded: false,
       setApiKey: (apiKey) => set({ apiKey }),
-      setModel: (model) => set({ model }),
+      setModel: () => set({ model: NVIDIA_MODELS[0].id }),
       setHasOnboarded: (hasOnboarded) => set({ hasOnboarded }),
     }),
-    { name: "lumen-settings" }
+    {
+      name: "lumen-settings",
+      merge: (saved, current) => ({
+        ...current,
+        ...(saved as Partial<SettingsState>),
+        model: NVIDIA_MODELS[0].id,
+      }),
+    }
   )
 );
